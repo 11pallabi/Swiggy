@@ -1,8 +1,9 @@
 import ResList from "../utils/ResList";
 import ResturantCard from "./RestaurantCard";
+import ShimmerUI from "./ShimmerUi";
 import { useState, useEffect } from "react";
 const Body = () => {
-  const [ListofRestaurant, setListofRestaurant] = useState(ResList.restaurants);
+  const [ListofRestaurant, setListofRestaurant] = useState([]);
   useEffect(() => {
     fetchData();
   }, []);
@@ -12,13 +13,17 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log("Restaurant",
+    console.log(
+      "Restaurant",
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setListofRestaurant(
       json?.data?.cards[1]?.card.card?.gridElements?.infoWithStyle?.restaurants
     );
   };
+  if (ListofRestaurant && ListofRestaurant.length === 0) {
+    return <ShimmerUI />;
+  }
   return (
     <div className="body">
       <div className="filter">
@@ -35,10 +40,9 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {
-          ListofRestaurant.map((data) => (
-            <ResturantCard key={data.info.id} resData={data} />
-          ))}
+        {ListofRestaurant.map((data) => (
+          <ResturantCard key={data.info.id} resData={data} />
+        ))}
       </div>
     </div>
   );
