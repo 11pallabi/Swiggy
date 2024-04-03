@@ -1,4 +1,4 @@
-const ResList = {
+let ResList = {
     "restaurants": [
         {
             "info": {
