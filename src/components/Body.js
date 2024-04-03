@@ -4,6 +4,8 @@ import ShimmerUI from "./ShimmerUi";
 import { useState, useEffect } from "react";
 const Body = () => {
   const [ListofRestaurant, setListofRestaurant] = useState([]);
+  const [SearchText, setSearchText] = useState("");
+  console.log("render")
   useEffect(() => {
     fetchData();
   }, []);
@@ -24,6 +26,29 @@ const Body = () => {
   return ListofRestaurant.length === 0 ? (<ShimmerUI/>):(
     <div className="body">
       <div className="filter">
+      <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            value={SearchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              console.log(SearchText);
+              const filteredRestaurant = ListofRestaurant.filter((res) =>
+                res.info.name.toLowerCase().includes(SearchText.toLowerCase())
+              );
+              console.log(filteredRestaurant)
+              setListofRestaurant(filteredRestaurant);
+            }}
+          >
+            Search
+          </button>
+
+                </div>
         <button
           className="filter-btn"
           onClick={() => {
