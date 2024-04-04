@@ -4,6 +4,7 @@ import ShimmerUI from "./ShimmerUi";
 import { useState, useEffect } from "react";
 const Body = () => {
   const [ListofRestaurant, setListofRestaurant] = useState([]);
+  const [FilterderListofRestaurant,setFilterderListofRestaurant] = useState([]);
   const [SearchText, setSearchText] = useState("");
   console.log("render")
   useEffect(() => {
@@ -41,8 +42,8 @@ const Body = () => {
               const filteredRestaurant = ListofRestaurant.filter((res) =>
                 res.info.name.toLowerCase().includes(SearchText.toLowerCase())
               );
-              console.log(filteredRestaurant)
-              setListofRestaurant(filteredRestaurant);
+              console.log("filteredRestaurant",filteredRestaurant)
+              setFilterderListofRestaurant(filteredRestaurant);
             }}
           >
             Search
