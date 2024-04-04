@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     border: 1px solid black;
+    background-color: gainsboro;
 }
 .logo{
     width: 200px;
@@ -22,12 +23,13 @@
 .res-container {
     display:flex;
     flex-wrap: wrap;
+    background-color: gainsboro;
 }
 
 .res-card {
-    margin: 5px;
-    padding: 5px;
-    width: 218px;;
+    margin: 10px;
+    padding: 7px;
+    width: 278px;;
 
 }
 .res-card:hover {
