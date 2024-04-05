@@ -1,6 +1,6 @@
 import ResturantCard from "./RestaurantCard";
 import { useEffect, useState, useContext } from "react";
-import ShimmerUI from "./shimmerUI";
+import ShimmerUI from "./ShimmerUi";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/userContext";
