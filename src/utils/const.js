@@ -1,2 +1,3 @@
 export const CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/";
 export const LOGO_URL = "https://img.freepik.com/free-vector/delivery-service-illustrated_23-2148505081.jpg?w=740&t=st=1702891826~exp=1702892426~hmac=4e906855afd156fd933175b550a67d2815b6ab1b59313c672a6a374958864ccd"
+export const Rest_Menu = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=20.27060&lng=85.83340&restaurantId="
