@@ -1,6 +1,5 @@
-import ResList from "../Utils/reslist";
 import ResturantCard from "./RestaurantCard";
-import { useEffect, useState ,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import ShimmerUI from "./shimmerUI";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -21,9 +20,9 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log("Restaurant",
+    console.log(
+      "Restaurant",
       json?.data?.cards[1]?.card.card?.gridElements?.infoWithStyle?.restaurants
-
     );
     setListofRestaurant(
       json?.data?.cards[1]?.card.card?.gridElements?.infoWithStyle?.restaurants
@@ -47,14 +46,14 @@ const Body = () => {
         <div className="search m-4 p-4">
           <input
             type="text"
-
             className="border border-solid border-black"
             value={SearchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
-          <button className="px-4 py-2 shadow-blue-400 bg-green-100 m-4 rounded-r-lg"
+          <button
+            className="px-4 py-2 shadow-blue-400 bg-green-100 m-4 rounded-r-lg"
             onClick={() => {
               console.log(SearchText);
               const filteredRestaurant = ListofRestaurant.filter((res) =>
@@ -68,18 +67,18 @@ const Body = () => {
           </button>
         </div>
         <div className="search m-4 p-4 flex items-center">
-        <button
-          className="px-4 py-2 shadow-blue-400 bg-green-100 m-4 rounded-r-lg"
-          onClick={() => {
-            const filteredList = ListofRestaurant.filter(
-              (res) => res.info.avgRating > 4.5
-            );
-            console.log("filteredList", filteredList);
-            setFilterderListofRestaurant(filteredList);
-          }}
-        >
-          Top Rated restaurant
-        </button>
+          <button
+            className="px-4 py-2 shadow-blue-400 bg-green-100 m-4 rounded-r-lg"
+            onClick={() => {
+              const filteredList = ListofRestaurant.filter(
+                (res) => res.info.avgRating > 4.5
+              );
+              console.log("filteredList", filteredList);
+              setFilterderListofRestaurant(filteredList);
+            }}
+          >
+            Top Rated restaurant
+          </button>
         </div>
         <div className="search m-4 p-4 flex items-center">
           <label>UserName : </label>
@@ -89,15 +88,13 @@ const Body = () => {
             onChange={(e) => setUserName(e.target.value)}
           />
         </div>
-        
       </div>
       <div className="flex flex-wrap">
-      {FilterderListofRestaurant.map((data) => (
-  <Link to={"/restaurants/" + data.info.id} key={data.info.id}>
-    <ResturantCard resData={data} />
-  </Link>
-))}
-
+        {FilterderListofRestaurant.map((data) => (
+          <Link to={"/restaurants/" + data.info.id} key={data.info.id}>
+            <ResturantCard resData={data} />
+          </Link>
+        ))}
       </div>
     </div>
   );
