@@ -1,14 +1,11 @@
+import React from "react";
 const Grocery = () => {
-  return (
-    <div>
-      <h1>
-        {" "}
-        Our grocery online store, and we have a lot of child components inside
-        this web page!!!
-      </h1>
-    </div>
-  );
-};
+   return (
+      <div className="text-center p-52">
+         <span className="text-3xl font-bold text-black">Welcome to Hunger Mart </span>
+      </div>
+
+   )
+}
 
 export default Grocery;
-//hello

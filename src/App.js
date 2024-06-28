@@ -1,53 +1,36 @@
-import React,{Suspense, lazy} from "react";
-import ReactDOM from "react-dom/client";
-import Header from "./components/Header";
-import Body from "./components/Body";
-import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import RestaurantMenu from "./components/RestaurantMenu";
-const Grocery = lazy(()=>import("./components/Grocery"))
-const AppLayout = () => {
-    return (
-        <div className="app">
-            <Header />
-            <Outlet />
-        </div>
-    )
+import './App.css';
+import Header from './components/Header';
+import { Outlet } from 'react-router-dom';
+import useInternetStatus from './utils/OnlineStatus';
+import { useEffect, useState } from 'react';
+import AddonsContext from './utils/AddonsContext';
+import { Provider } from 'react-redux';
+import AppStore from './Redux/AppStore';
+
+const AppLayput = () =>{
+   let onlinestat = useInternetStatus();
+
+   const [addonsSelected, setAddonsSelected] = useState([]);
+
+   if(!onlinestat) {
+      return (
+         <div className="flex flex-row justify-center align-middle">
+            <h1>Bad Internet connection!!!</h1>
+         </div>
+      );
+   } 
+
+   return (
+      <div className='font-appFont'> {/* Add bg-white to override sm:bg-red-300 for larger screens */}
+         {/* we have provided this app store to the provider and all the components inside it can use the content of app store so make it global so that any component can use it we used it in the root level just as usecontext */}
+         <Provider store={AppStore}>
+            <AddonsContext.Provider value={{ addonsSelected, setAddonsSelected }}>  
+               <Header />
+               <Outlet />
+            </AddonsContext.Provider>
+         </Provider>
+      </div>
+   )
 }
 
-const appRoute = createBrowserRouter([
-    {
-        path:"/",
-        element:<AppLayout/>,
-        children:[
-            {
-                path:"/",
-                element:<Body/>
-            },
-            {
-                path:"/about",
-                element:<About/>
-            },
-            {
-                path:"/contact",
-                element:<Contact/>
-            },
-            {
-                path:"/grocery",
-                element:<Suspense fallback={<h1>Loading....</h1>}><Grocery/></Suspense>
-            },
-            {
-                path:"/restaurants/:resId",
-                element:<RestaurantMenu/>
-            }
-        ]
-
-    },
-  
-])
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<RouterProvider router={appRoute}/>);
-
-
+export {AppLayput}
